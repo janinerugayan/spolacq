@@ -2,9 +2,9 @@
 
 if [[  ($# -le 1) || ($# -ge 3) ]]
 then
-    echo "Usage: bash run.bash DATA_NAME(arbitrary) MAX_K" 
+    echo "Usage: bash run.bash DATA_NAME(arbitrary) MAX_K"
     exit 1
-fi 
+fi
 
 
 # unsupervised syllable boundary detection by matlab
@@ -12,7 +12,7 @@ mkdir -p ../tools/syllables/thetaOscillator/wavs
 mkdir -p ../tools/syllables/thetaOscillator/results
 cp ../combined_sounds/combined_sounds.wav ../tools/syllables/thetaOscillator/wavs/
 
-matlab -r "run('../tools/syllables/thetaOscillator/process_wavs.m');exit;"
+matlab -nodesktop -nodisplay -r "run('../tools/syllables/thetaOscillator/process_wavs.m');exit;"
 
 
 mkdir -p ../exp
