@@ -199,23 +199,23 @@ for seed in range(1, 6):
 
     # Training Loop
 
-    num_episodes = 5
+    num_episodes = 50
     # suc_per_100 = 0
     for i_episode in range(num_episodes):
         print(f"Episode: {i_episode}")
         # Initialize the environment and state
         agent.reset()
-        
+
         last_state = agent.get_state().to(device)
         current_state = agent.get_state().to(device)
         state = current_state
-        
+
         for t in count():
             # Select and perform an action
             action = select_action(state)
             x_change, y_change, z_change = env.feedback(action)
             reward, done = agent.evaluate_reward(x_change, y_change, z_change)
-            
+
             reward = torch.tensor([reward], device=device)
 
             # Observe new state
@@ -239,7 +239,7 @@ for seed in range(1, 6):
                 episode_durations.append(t + 1)
                 plot_durations()
                 break
-            
+
         # Update the target network, copying all weights and biases in DQN
         if i_episode % TARGET_UPDATE == 0:
             target_net.load_state_dict(policy_net.state_dict())
@@ -249,6 +249,6 @@ for seed in range(1, 6):
     plt.ioff()
     pic_name = "../exp/res_imgs/result_" + str(seed) + ".png"
     plt.savefig(pic_name)
-    
+
     df = pd.DataFrame(episode_durations, columns=["Seed" + str(seed)]).T
     df.to_csv(record_file, index=True, header=False, mode='a')
