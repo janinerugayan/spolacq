@@ -39,7 +39,7 @@ for line in lines:
 print(res_dict)
 
 # added recog result record write to text file
-f = open('..exp/process_recog_result.txt', 'a')
+f = open('../exp/process_recog_result.txt', 'a')
 f.write(str(res_dict))
 f.close()
 
