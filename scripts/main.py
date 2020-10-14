@@ -157,10 +157,10 @@ def optimize_model():
 
 # Hyperparameters
 BATCH_SIZE = 128
-GAMMA = 0.99 #0.999, tokyo uni value = 0.5
+GAMMA = 0.5 #0.999, tokyo uni value = 0.5
 EPS_START = 0.9
 EPS_END = 0.05
-EPS_DECAY = 200
+EPS_DECAY = 100 # tokyo uni value = 200
 TARGET_UPDATE = 10
 
 
