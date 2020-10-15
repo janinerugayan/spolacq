@@ -17,7 +17,7 @@ class Env:
     def reset(self):
         #self.potion_num = 9
         pass
-    
+
     def feedback(self, action):
         """
         Action List
@@ -33,8 +33,8 @@ class Env:
         x_change = 0
         y_change = 0
         z_change = 0
-        
-        
+
+
         probability = random.uniform(0, 1)
 
         if probability < 0.9:
@@ -67,7 +67,7 @@ class Env:
         #         y_change -= 1
         #     elif action >= 215 and action < 236:
         #         y_change += 1
-            
+
 
         # if action >= 0 and action < 2:
         #     z_change += 1
@@ -94,7 +94,7 @@ class Agent:
         self.y = random.randint(-self.random_range, self.random_range)
         self.z = random.randint(-self.random_range, self.random_range)
         pass
-    
+
     def reset(self):
         self.x = random.randint(-self.random_range, self.random_range)
         self.y = random.randint(-self.random_range, self.random_range)
@@ -105,7 +105,12 @@ class Agent:
         state = np.asarray([self.x, self.y, self.z], dtype=np.float32)
         state = torch.from_numpy(state).reshape(1, 3)
         return state
-    
+
+    # added for visualization
+    def get_position(self):
+        position = np.asarray([self.x, self.y, self.z], dtype=np.float32)
+        return position
+
     def evaluate_reward(self, x_change, y_change, z_change):
         # satisfaction level
         old_sl = -(self.x ** 2 + self.y ** 2 + self.z ** 2)
@@ -132,7 +137,7 @@ class Env:
     def reset(self):
         #self.potion_num = 9
         pass
-    
+
     def feedback(self, action):
         """
         Action List
@@ -177,7 +182,7 @@ class Env:
             w_change = -3
             emo_change = 1
             house_change = 1
-        
+
         ener_change -= 1
         day_change = 1
         return w_change, emo_change, ener_change, house_change, day_change
@@ -198,7 +203,7 @@ class Agent:
         #self.hp         = random.randint(1, 10)
         #self.coins      = 0
         pass
-    
+
     def reset(self):
         #self.hp     = random.randint(1, 10)
         #self.coins  = 0
@@ -215,7 +220,7 @@ class Agent:
         state = np.asarray([self.wealth, self.emotion, self.energy, self.can_buy_house], dtype=np.float32)
         state = torch.from_numpy(state).reshape(1, 4)
         return state
-    
+
     def evaluate_reward(self, w_change, emo_change, ener_change, house_change, day_change):
         self.emotion += emo_change
         # The maximum value shouldn't exceed 5
@@ -228,7 +233,7 @@ class Agent:
         self.energy = min(self.energy, 5)
 
         self.day += day_change
-        
+
         if self.wealth > 3:
             self.can_buy_house = 5
         else:
@@ -251,6 +256,6 @@ class Agent:
         #    reward += 0.5 * self.wealth
         #if done == 1 and house_change == 1:
         #    reward += (1000 - self.day) * 0.01 # Propotion of the importance of the time
-        
+
         return reward, done
 '''

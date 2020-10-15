@@ -157,15 +157,19 @@ def optimize_model():
 
 # Hyperparameters
 BATCH_SIZE = 128
-GAMMA = 0.5 #0.999, tokyo uni value = 0.5
-EPS_START = 0.9
-EPS_END = 0.05
-EPS_DECAY = 200 # tokyo uni value = 200
-TARGET_UPDATE = 10
+GAMMA = 0.5  #0.999, tokyo uni value = 0.5
+EPS_START = 0.9  # used in episode threshold calculation
+EPS_END = 0.05  # used in episode threshold calculation
+EPS_DECAY = 200  # tokyo uni value = 200
+TARGET_UPDATE = 10  # for updating the target network
 
 
 # File for recording episode durations
 record_file = "../exp/rl_results.csv"
+
+# File for recording agent positions
+position_file = "../exp/agent_positions.csv"
+
 # Random Seed
 for seed in range(1, 6):
     random.seed(seed)
@@ -197,9 +201,12 @@ for seed in range(1, 6):
     steps_done = 0
     episode_durations = []
 
+    # for visualization
+    agent_positions = []
+
     # Training Loop
 
-    num_episodes = 50
+    num_episodes = 5
     # suc_per_100 = 0
     for i_episode in range(num_episodes):
         print(f"Episode: {i_episode}")
@@ -211,6 +218,9 @@ for seed in range(1, 6):
         state = current_state
 
         for t in count():
+            # get position of agent
+            agent_positions.append(agent.get_position())
+
             # Select and perform an action
             action = select_action(state)
             x_change, y_change, z_change = env.feedback(action)
@@ -252,3 +262,7 @@ for seed in range(1, 6):
 
     df = pd.DataFrame(episode_durations, columns=["Seed" + str(seed)]).T
     df.to_csv(record_file, index=True, header=False, mode='a')
+
+    # record of agent positions
+    df = pd.DataFrame(agent_positions, columns=["Seed" + str(seed)]).T
+    df.to_csv(position_file, index=True, header=False, mode='a')
