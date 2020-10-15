@@ -264,5 +264,5 @@ for seed in range(1, 6):
     df.to_csv(record_file, index=True, header=False, mode='a')
 
     # record of agent positions
-    df = pd.DataFrame(agent_positions, columns=["Seed" + str(seed)]).T
+    df = pd.DataFrame(agent_positions).T
     df.to_csv(position_file, index=True, header=False, mode='a')
