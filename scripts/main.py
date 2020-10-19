@@ -95,7 +95,7 @@ def plot_positions(last_position, agent_positions, i_episode, seed):
     positions_fig.savefig(pic_name2)
 
     # record of agent positions
-    position_file = "../exp/record_positions/seed" + str(seed) + "_ep" + str(i_episode) + "_positions.csv"
+    position_file = "../exp/seed" + str(seed) + "_ep" + str(i_episode) + "_positions.csv"
     df = pd.DataFrame(agent_positions)
     df.to_csv(position_file, index=True, header=False, mode='a')
 
