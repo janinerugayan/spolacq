@@ -19,6 +19,9 @@ import torch.nn.functional as F
 from utils import Env, Agent
 import pandas as pd
 
+# for visualization
+from mpl_toolkits import mplot3d
+
 # read stt recog results
 with open("../exp/pkls/recog_results_dict.pkl", "rb") as f:
     res_dict = pickle.load(f)
@@ -40,6 +43,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
+# for figure saving
+durations_fig = plt.figure(2)
+positions_fig = plt.figure(3)
+
+
+
 def plot_durations():
     plt.figure(2)
     plt.clf()
@@ -59,6 +68,37 @@ def plot_durations():
     if is_ipython:
         display.clear_output(wait=True)
         display.display(plt.gcf())
+
+
+# for agent position visualization
+def plot_positions(last_position, agent_positions, i_episode, seed):
+    plt.figure(3)
+    plt.clf()
+    ax = plt.axes(projection='3d')
+    # Data for a three-dimensional line
+    agent_pos = np.array(agent_positions)
+    x = agent_pos[0:(last_position+1),0]
+    y = agent_pos[0:(last_position+1),1]
+    z = agent_pos[0:(last_position+1),2]
+    # 3D plot
+    ax.plot3D(x, y, z, 'gray')
+    ax.scatter3D(x[0], y[0], z[0], 'green')
+    ax.scatter3D(x[last_position], y[last_position], z[last_position], 'red')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    ax.set_xlim3d(-22,22)
+    ax.set_ylim3d(-22,22)
+    ax.set_zlim3d(-22,22)
+
+    pic_name2 = "../exp/res_imgs/seed" + str(seed) + "_ep" + str(i_episode) + "_positions.png"
+    positions_fig.savefig(pic_name2)
+
+    # record of agent positions
+    position_file = "../exp/record_positions/seed" + str(seed) + "_ep" + str(i_episode) + "_positions.csv"
+    df = pd.DataFrame(agent_positions)
+    df.to_csv(position_file, index=True, header=False, mode='a')
+
 
 class ReplayMemory(object):
 
@@ -167,8 +207,7 @@ TARGET_UPDATE = 10  # for updating the target network
 # File for recording episode durations
 record_file = "../exp/rl_results.csv"
 
-# File for recording agent positions
-position_file = "../exp/agent_positions.csv"
+
 
 # Random Seed
 for seed in range(1, 6):
@@ -201,8 +240,8 @@ for seed in range(1, 6):
     steps_done = 0
     episode_durations = []
 
-    # for visualization
-    agent_positions = []
+    # # for visualization
+    # agent_positions = []
 
     # Training Loop
 
@@ -216,6 +255,9 @@ for seed in range(1, 6):
         last_state = agent.get_state().to(device)
         current_state = agent.get_state().to(device)
         state = current_state
+
+        # for visualization
+        agent_positions = []
 
         for t in count():
             # get position of agent
@@ -248,6 +290,9 @@ for seed in range(1, 6):
             if done:
                 episode_durations.append(t + 1)
                 plot_durations()
+                # for agent position visualization
+                last_position = t
+                plot_positions(last_position, agent_positions, i_episode, seed)
                 break
 
         # Update the target network, copying all weights and biases in DQN
@@ -257,12 +302,9 @@ for seed in range(1, 6):
     print(f'Seed {seed} Complete')
 
     plt.ioff()
-    pic_name = "../exp/res_imgs/result_" + str(seed) + ".png"
-    plt.savefig(pic_name)
+    pic_name1 = "../exp/res_imgs/result_" + str(seed) + ".png"
+    durations_fig.savefig(pic_name1)
+
 
     df = pd.DataFrame(episode_durations, columns=["Seed" + str(seed)]).T
     df.to_csv(record_file, index=True, header=False, mode='a')
-
-    # record of agent positions
-    df = pd.DataFrame(agent_positions)
-    df.to_csv(position_file, index=True, header=False, mode='a')
