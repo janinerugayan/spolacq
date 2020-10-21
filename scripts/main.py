@@ -87,9 +87,9 @@ def plot_positions(last_position, agent_positions, i_episode, seed):
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
-    ax.set_xlim3d(-22,22)
-    ax.set_ylim3d(-22,22)
-    ax.set_zlim3d(-22,22)
+    ax.set_xlim3d(-50,50)
+    ax.set_ylim3d(-50,50)
+    ax.set_zlim3d(-50,50)
 
     pic_name2 = "../exp/res_imgs/seed" + str(seed) + "_ep" + str(i_episode) + "_positions.png"
     positions_fig.savefig(pic_name2)
