@@ -230,7 +230,7 @@ for seed in range(1, 6):
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
 
-    learning_rate = 1e-4 # tokyo uni value = 1e-2
+    learning_rate = 1e-3 # tokyo uni value = 1e-2
     # Currently using Adam optimizer.
     optimizer = optim.Adam(policy_net.parameters(), lr=learning_rate)
 
