@@ -87,9 +87,9 @@ def plot_positions(last_position, agent_positions, i_episode, seed):
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
-    ax.set_xlim3d(-50,50)
-    ax.set_ylim3d(-50,50)
-    ax.set_zlim3d(-50,50)
+    ax.set_xlim3d(-30,30)
+    ax.set_ylim3d(-30,30)
+    ax.set_zlim3d(-30,30)
 
     pic_name2 = "../exp/res_imgs/seed" + str(seed) + "_ep" + str(i_episode) + "_positions.png"
     positions_fig.savefig(pic_name2)
@@ -245,7 +245,7 @@ for seed in range(1, 6):
 
     # Training Loop
 
-    num_episodes = 5
+    num_episodes = 10
     # suc_per_100 = 0
     for i_episode in range(num_episodes):
         print(f"Episode: {i_episode}")
