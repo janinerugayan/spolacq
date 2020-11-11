@@ -240,8 +240,7 @@ for seed in range(1, 6):
     steps_done = 0
     episode_durations = []
 
-    # # for visualization
-    # agent_positions = []
+
 
     # Training Loop
 
@@ -257,7 +256,7 @@ for seed in range(1, 6):
         state = current_state
 
         # for visualization
-        agent_positions = []
+        # agent_positions = []
 
         for t in count():
             # get position of agent
@@ -291,8 +290,8 @@ for seed in range(1, 6):
                 episode_durations.append(t + 1)
                 plot_durations()
                 # for agent position visualization
-                last_position = t
-                plot_positions(last_position, agent_positions, i_episode, seed)
+                # last_position = t
+                # plot_positions(last_position, agent_positions, i_episode, seed)
                 break
 
         # Update the target network, copying all weights and biases in DQN
