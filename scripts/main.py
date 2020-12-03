@@ -210,7 +210,7 @@ record_file = "../exp/rl_results.csv"
 
 
 # Random Seed
-for seed in range(1, 6):
+for seed in range(1, 101):  # original range (1,6)
     random.seed(seed)
     torch.manual_seed(0)
 
@@ -260,7 +260,7 @@ for seed in range(1, 6):
 
         for t in count():
             # get position of agent
-            agent_positions.append(agent.get_position())
+            # agent_positions.append(agent.get_position())
 
             # Select and perform an action
             action = select_action(state)
