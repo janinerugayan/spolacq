@@ -260,6 +260,7 @@ for seed in range(1, 101):  # original range (1,6)
 
         for t in count():
             # get position of agent
+
             # agent_positions.append(agent.get_position())
 
             # Select and perform an action
