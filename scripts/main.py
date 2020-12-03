@@ -23,7 +23,7 @@ import pandas as pd
 from mpl_toolkits import mplot3d
 
 # read stt recog results
-with open("../exp/pkls/recog_results_14-Oct_SHUFFLED_run2.pkl", "rb") as f:
+with open("../exp/pkls/recog_results_14-Oct_SHUFFLED_run1.pkl", "rb") as f:
     res_dict = pickle.load(f)
 
 env = Env(res_dict)
