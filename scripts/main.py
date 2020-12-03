@@ -22,9 +22,18 @@ import pandas as pd
 # for visualization
 from mpl_toolkits import mplot3d
 
-# read stt recog results
-with open("../exp/pkls/recog_results_14-Oct_SHUFFLED_run1.pkl", "rb") as f:
+# for experiment bash script
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_name',   type=str)
+args = parser.parse_args()
+
+with open("../exp/pkls/" + args.data_name + ".pkl", "rb") as f:
     res_dict = pickle.load(f)
+
+# read stt recog results - original code:
+# with open("../exp/pkls/recog_results_14-Oct_SHUFFLED_run1.pkl", "rb") as f:
+#     res_dict = pickle.load(f)
 
 env = Env(res_dict)
 
@@ -204,9 +213,11 @@ EPS_DECAY = 200  # tokyo uni value = 200
 TARGET_UPDATE = 10  # for updating the target network
 
 
-# File for recording episode durations
-record_file = "../exp/rl_results.csv"
+# for the experiments bash script:
+record_file = "../exp/rl_results_" + args.data_name +".csv"
 
+# File for recording episode durations - original code:
+# record_file = "../exp/rl_results.csv"
 
 
 # Random Seed
@@ -302,7 +313,8 @@ for seed in range(1, 101):  # original range (1,6)
     print(f'Seed {seed} Complete')
 
     plt.ioff()
-    pic_name1 = "../exp/res_imgs/result_" + str(seed) + ".png"
+    # pic_name1 = "../exp/res_imgs/result_" + str(seed) + ".png"
+    pic_name1 = "../exp/res_imgs/" + args.data_name + "-seed" + str(seed) + ".png"  # for experiments bash script 
     durations_fig.savefig(pic_name1)
 
 
