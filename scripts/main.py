@@ -23,7 +23,7 @@ import pandas as pd
 from mpl_toolkits import mplot3d
 
 # read stt recog results
-with open("../exp/pkls/recog_results_dict.pkl", "rb") as f:
+with open("../exp/pkls/recog_results_randomseg-run1_dict.pkl", "rb") as f:
     res_dict = pickle.load(f)
 
 env = Env(res_dict)
@@ -210,7 +210,7 @@ record_file = "../exp/rl_results.csv"
 
 
 # Random Seed
-for seed in range(1, 51):  # original range (1,6)
+for seed in range(1, 101):  # original range (1,6)
     random.seed(seed)
     torch.manual_seed(0)
 
