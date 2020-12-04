@@ -1,9 +1,9 @@
 cd ../scripts/
 
 # for shuffled
-echo "START shuffled"
-python main.py --data_name=recog_results_14-Oct_SHUFFLED_run3
-echo "shuffled done"
+# echo "START shuffled"
+# python main.py --data_name=recog_results_14-Oct_SHUFFLED_run3
+# echo "shuffled done"
 
 # for not shuffled
 echo "START not shuffled"
