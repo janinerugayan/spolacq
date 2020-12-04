@@ -221,7 +221,7 @@ record_file = "../exp/rl_results_" + args.data_name +".csv"
 
 
 # Random Seed
-for seed in range(1, 101):  # original range (1,6)
+for seed in range(1, 51):  # original range (1,6)
     random.seed(seed)
     torch.manual_seed(0)
 
@@ -314,7 +314,7 @@ for seed in range(1, 101):  # original range (1,6)
 
     plt.ioff()
     # pic_name1 = "../exp/res_imgs/result_" + str(seed) + ".png"
-    pic_name1 = "../exp/res_imgs/" + args.data_name + "-seed" + str(seed) + ".png"  # for experiments bash script 
+    pic_name1 = "../exp/res_imgs/" + args.data_name + "-seed" + str(seed) + ".png"  # for experiments bash script
     durations_fig.savefig(pic_name1)
 
 

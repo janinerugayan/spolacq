@@ -2,7 +2,7 @@ cd ../scripts/
 
 # for shuffled
 echo "START shuffled"
-python main.py --data_name=recog_results_14-Oct_SHUFFLED_run1
+# python main.py --data_name=recog_results_14-Oct_SHUFFLED_run1
 python main.py --data_name=recog_results_14-Oct_SHUFFLED_run3
 echo "shuffled done"
 
@@ -18,10 +18,10 @@ echo "========= re-run done ========="
 # echo "not shuffled done"
 #
 # for random segmentation
-echo "START random segmentation"
+# echo "START random segmentation"
 # python main.py --data_name=recog_results_randomseg-run3_dict
-python main.py --data_name=recog_results_randomseg-run1_dict
-echo "random segmentation done"
+# python main.py --data_name=recog_results_randomseg-run1_dict
+# echo "random segmentation done"
 
 # rerun this batch:
 # echo "========= START re-run of not-shuffled run2 ========="
