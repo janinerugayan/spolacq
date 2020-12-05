@@ -53,8 +53,8 @@ Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
 # for figure saving
-durations_fig = plt.figure(2)
-positions_fig = plt.figure(3)
+# durations_fig = plt.figure(2)
+# positions_fig = plt.figure(3)
 
 
 
@@ -221,7 +221,7 @@ record_file = "../exp/rl_results_" + args.data_name +".csv"
 
 
 # Random Seed
-for seed in range(1, 51):  # original range (1,6)
+for seed in range(1, 101):  # original range (1,6)
     random.seed(seed)
     torch.manual_seed(0)
 
@@ -300,7 +300,7 @@ for seed in range(1, 51):  # original range (1,6)
             optimize_model()
             if done:
                 episode_durations.append(t + 1)
-                plot_durations()
+                # plot_durations()
                 # for agent position visualization
                 # last_position = t
                 # plot_positions(last_position, agent_positions, i_episode, seed)
@@ -314,8 +314,8 @@ for seed in range(1, 51):  # original range (1,6)
 
     plt.ioff()
     # pic_name1 = "../exp/res_imgs/result_" + str(seed) + ".png"
-    pic_name1 = "../exp/res_imgs/" + args.data_name + "-seed" + str(seed) + ".png"  # for experiments bash script
-    durations_fig.savefig(pic_name1)
+    # pic_name1 = "../exp/res_imgs/" + args.data_name + "-seed" + str(seed) + ".png"  # for experiments bash script
+    # durations_fig.savefig(pic_name1)
 
 
     df = pd.DataFrame(episode_durations, columns=["Seed" + str(seed)]).T
