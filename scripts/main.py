@@ -23,17 +23,17 @@ import pandas as pd
 from mpl_toolkits import mplot3d
 
 # for experiment bash script
-# import argparse
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--data_name',   type=str)
-# args = parser.parse_args()
-#
-# with open("../exp/pkls/" + args.data_name + ".pkl", "rb") as f:
-#     res_dict = pickle.load(f)
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_name',   type=str)
+args = parser.parse_args()
+
+with open("../exp/pkls/" + args.data_name + ".pkl", "rb") as f:
+    res_dict = pickle.load(f)
 
 # read stt recog results - original code:
-with open("../exp/pkls/recog_results_dict.pkl", "rb") as f:
-    res_dict = pickle.load(f)
+# with open("../exp/pkls/recog_results_dict.pkl", "rb") as f:
+#     res_dict = pickle.load(f)
 
 env = Env(res_dict)
 
@@ -214,10 +214,10 @@ TARGET_UPDATE = 10  # for updating the target network
 
 
 # for the experiments bash script:
-# record_file = "../exp/rl_results_" + args.data_name +".csv"
+record_file = "../exp/rl_results_" + args.data_name +".csv"
 
 # File for recording episode durations - original code:
-record_file = "../exp/rl_results.csv"
+# record_file = "../exp/rl_results.csv"
 
 
 # Random Seed
